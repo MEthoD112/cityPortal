@@ -77,4 +77,4 @@ const json = [
     }
 ];
 
-localStorage.setItem('cities', JSON.stringify(json));
+//localStorage.setItem('cities', JSON.stringify(json));
