@@ -160,8 +160,15 @@ class EventsForCities {
         isCriminal = isCriminal === 'true' ? true : false;
         isPolluted = isPolluted === 'true' ? true : false;
 
+        let id;
+
+        if (app.cities.length === 0) {
+            id = 0;
+        } else {
+            id = app.cities[app.cities.length - 1].id + 1;
+        }
         const city = {
-            id: app.cities[app.cities.length - 1].id + 1,
+            id: id,
             name: cityName,
             isIndustrial: isIndustrial,
             isCriminal: isCriminal,
