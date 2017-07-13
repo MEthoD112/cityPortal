@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityPortal</title>
+    <link rel="shortcut icon" href="img/favicon.jpg" type="image/x-icon">
+    <link href="dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/screen.css">
+    <script src="jquery/jquery.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="scripts/data.js"></script>
+</head>
+
+<body>
+    <!-- Container for button add city -->
+    <div id="wrapper" class="wrapper">
+        <div class="button-wrapper">
+            <button type="button" class="addcity btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="add-new-city-button">
+                Add New City
+            </button>
+        </div>
+    </div>
+    <!-- Modal for adding area -->
+    <div class="modal fade" id="areaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabelForEdit"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="areainput">
+                        <label for="areaname" class="arealabel">
+                        Name: 
+                        <input type="text" id="areaname">
+                        </label>
+                    </div>
+                    <div class="areainput">
+                        <label for="areadescription">
+                            Description: 
+                            <input type="text" id="areadescription">
+                        </label>
+                    </div>
+                    <div class="areainput">
+                        <label for="areacitizens">
+                            Citizens: 
+                            <input type="text" id="areacitizens">
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-area">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal for adding city -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body" id="modal-city">
+                    <label for="addnewcity">
+                       City name: 
+                       <input type="text" id="addnewcity">
+                    </label>
+                    <div>
+                        <div>
+                            <label for="i">
+                                Is Industrial
+                                <input type="button" id="i" value="I" class="i" data-act="true">
+                            </label>
+                        </div>
+                        <div>
+                            <label for="c">
+                                Is Criminal
+                                <input type="button" id="c" value="C" class="c" data-act="false">
+                            </label>
+                        </div>
+                        <div>
+                            <label for="p">
+                                Is Polluted
+                                <input type="button" id="p" value="P" class="p" data-act="false">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save-new-city" data-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="scripts/constants.js"></script>
+<script src="scripts/initapp.js"></script>
+<script src="scripts/eventsforcities.js"></script>
+<script src="scripts/eventsforareas.js"></script>
+<script src="scripts/app.js"></script>
+</html>

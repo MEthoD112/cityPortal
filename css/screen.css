@@ -1,0 +1,168 @@
+.wrapper {
+  max-width: 1200px;
+  margin: 5em auto 0;
+}
+.wrapper .panel-group {
+  margin-bottom: 0;
+}
+.button-wrapper {
+  overflow: hidden;
+}
+.addcity {
+  border:2px solid#2024c4;
+  border-radius: 0.6em;
+  color: #ffffff;
+  background: #51adf3;
+  width: 10em;
+  height: 2.3em;
+  float: right;
+  outline: none;
+}
+.addcity:hover {
+  background: #003ffe;
+}
+.panel .panel-heading {
+  background: #c6daea;
+  overflow: hidden;
+  position: relative;
+}
+.panel .panel-heading a {
+  margin-left: 1em;
+  color:#003ffe;
+  font-weight: bold;
+}
+.panel .panel-heading button {
+  width: 2em;
+  height: 2em;
+  color: #ffffff;
+  background: #ff0000;
+  outline: none;
+  border-radius: 0.4em;
+}
+.areas {
+  display: inline-block;
+  position: absolute;
+  left: 25em;
+  background: #ffffff;
+  width: 50em;
+  margin-top: 0.4em;
+}
+.areas span {
+  padding: 1em;
+}
+.marks {
+  float:right;
+}
+.marks button {
+  width: 2em;
+  height: 2em;
+}
+.newarea {
+  overflow: hidden;
+}
+.newareabutton {
+  border:2px solid#2024c4;
+  border-radius: 0.6em;
+  color: #ffffff;
+  background: #51adf3;
+  width: 10em;
+  height: 2em;
+  float: right;
+  outline: none;
+  padding:0;
+}
+.panel-collapse {
+  background: #9dc2cc;
+}
+.areasdown {
+  background: #b1f7be;
+  overflow: hidden;
+  border-radius: 0.45em;
+  margin-bottom: 0.4em;
+  height: 2.5em;
+  position: relative;
+}
+.areasdown button {
+  width: 2em;
+  height: 2em;
+  color: #ffffff;
+  background: #ff0000;
+  outline: none;
+  border-radius: 0.4em;
+  margin-top:0.2em;
+}
+.areasdown button:first-child {
+  margin-left:1em;
+}
+.areasdown span {
+  margin-left: 1em;
+}
+.areasdown .areadown-name {
+  font-weight: bold;
+}
+.description {
+  display: inline-block;
+  width: 50em;
+  position: absolute;
+  left:23em;
+  top:0.6em;
+  background: #ffffff;
+  padding-left:1em;
+}
+.citizenamount {
+  float:right;
+  width: 8em;
+  background: #ffffff;
+  margin: 0.6em;
+  text-align: center;
+}
+
+
+.modal-content .modal-body {
+  padding: 15px 35px;
+}
+.modal-content .modal-body input {
+  width: 30em;
+}
+.modal-content .modal-body .i,
+.modal-content .modal-body .c,
+.modal-content .modal-body .p {
+  width: 2em;
+  height: 1.6em;
+  position: absolute;
+  right: 2em;
+  top:0;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+.modal-content .modal-body .i:hover,
+.modal-content .modal-body .c:hover,
+.modal-content .modal-body .p:hover {
+  border: 1px solid #ff0000;
+}
+.modal-content .modal-body .i {
+  background: #4ee321;
+}
+.modal-content .modal-body .c,
+.modal-content .modal-body .p {
+  background: #f39846;
+}
+.modal-body div {
+  margin-left: 11em;
+  margin-top:2em;
+  position: relative;
+}
+.modal-body div label {
+  font-size:1.3em;
+  cursor: pointer;
+}
+.modal-body div div {
+  position: relative;
+}
+.modal-body .arealabel {
+  position: relative;
+}
+.modal-body .areainput {
+  margin:0;
+}
