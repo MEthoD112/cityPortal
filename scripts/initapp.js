@@ -2,7 +2,7 @@ class initApp {
     constructor() {
         this.cities = JSON.parse(localStorage.getItem('cities'));
         this.wrapper = document.getElementById('wrapper');
-        this.displayCities();
+        //this.displayCities();
     }
 
     // Method for rendering everything
