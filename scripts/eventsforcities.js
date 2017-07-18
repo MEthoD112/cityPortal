@@ -4,31 +4,38 @@ class EventsForCities {
         this.saveNewCity = document.getElementById('save-new-city');
         this.modalCity = document.getElementById('modal-city');
         this.saveNewButton = document.getElementById('add-new-city-button');
+        this.errorEl = document.getElementById('city-error');
 
         // Add new City
         this.saveNewCity.addEventListener('click', (event) => {
-            const modalLabel = document.getElementById('myModalLabel').innerHTML;
-            if (modalLabel === constants.addCity) {
+            const modalLabel = document.getElementById('myModalLabel').getAttribute('data-mode');
+            if (modalLabel === 'add') {
                 this.saveNewCity.setAttribute('data-dismiss', 'modal');
                 const city = this.getInfoFromModal();
 
                 if (!this.validateCity(city)) {
                     this.saveNewCity.removeAttribute('data-dismiss');
-                    alert('Please, insert the name of the city');
                     return;
                 }
                 app.cities.push(city);
                 localStorage.setItem('cities', JSON.stringify(app.cities));
 
-                app.clearDisplay();
-                app.displayCities();
+                app.displayCities(city);
+                app.clearSearchList();
+                app.initSearchList(app.cities);
+                app.clearCountriesList();
+                app.initCountriesList(app.cities);
             }
         });
 
         // Open new city modal window
         this.saveNewButton.addEventListener('click', (event) => {
-            document.getElementById('myModalLabel').innerHTML = constants.addCity;
+            const modalLabel = document.getElementById('myModalLabel');
+            modalLabel.innerHTML = constants.addCity;
+            modalLabel.setAttribute('data-mode', 'add');
+            this.errorEl.innerHTML = '';
             document.getElementById('addnewcity').value = '';
+            document.getElementById('addnewcountry').value = '';
             let isIndustrial = document.getElementById('i');
             let isCriminal = document.getElementById('c');
             let isPolluted = document.getElementById('p');
@@ -70,7 +77,6 @@ class EventsForCities {
                 };
 
                 localStorage.setItem('cities', JSON.stringify(app.cities));
-
                 this.toogleColor(event.target);
             }
         });
@@ -86,20 +92,26 @@ class EventsForCities {
                         index = i;
                     }
                 });
+                this.removeCity(event.target);
 
                 app.cities.splice(index, 1);
                 localStorage.setItem('cities', JSON.stringify(app.cities));
-                app.clearDisplay();
-                app.displayCities();
+                app.clearSearchList();
+                app.initSearchList(app.cities);
+                app.clearCountriesList();
+                app.initCountriesList(app.cities);
             }
         });
 
         // Open modal window for edditing city
         this.wrapper.addEventListener('click', (event) => {
             if (event.target.className === 'edit-city') {
-                document.getElementById('myModalLabel').innerHTML = constants.editCity;
+                const modalLabel = document.getElementById('myModalLabel');
+                modalLabel.innerHTML = constants.editCity;
+                modalLabel.setAttribute('data-mode', 'edit');
+                this.errorEl.innerHTML = '';
                 const id = event.target.getAttribute('data-id');
-
+                this.element = event.target;
                 app.cities.forEach((item, i) => {
                     if (item.id === +id) {
                         this.index = i;
@@ -107,6 +119,7 @@ class EventsForCities {
                 });
 
                 document.getElementById('addnewcity').value = app.cities[this.index].name;
+                document.getElementById('addnewcountry').value = app.cities[this.index].country;
                 document.getElementById('i').setAttribute('data-act', app.cities[this.index].isIndustrial);
                 document.getElementById('c').setAttribute('data-act', app.cities[this.index].isCriminal);
                 document.getElementById('p').setAttribute('data-act', app.cities[this.index].isPolluted);
@@ -119,27 +132,42 @@ class EventsForCities {
 
         // Save eddited city
         this.saveNewCity.addEventListener('click', (event) => {
-            const modalLabel = document.getElementById('myModalLabel').innerHTML;
-            if (modalLabel === constants.editCity) {
+            const modalLabel = document.getElementById('myModalLabel').getAttribute('data-mode');
+            if (modalLabel === 'edit') {
                 this.saveNewCity.setAttribute('data-dismiss', 'modal');
                 const city = this.getInfoFromModal();
 
                 if (!this.validateCity(city)) {
                     this.saveNewCity.removeAttribute('data-dismiss');
-                    alert('Please, insert the name of the city');
                     return;
                 }
+                const cityNameElement = this.element.nextElementSibling;
+                cityNameElement.innerHTML = city.name;
+
+                const parentNode = cityNameElement.parentNode;
+                const attributesContainer = parentNode.children[parentNode.children.length - 1];
+
+                attributesContainer.children[0].setAttribute('data-act', city.isIndustrial);
+                attributesContainer.children[1].setAttribute('data-act', city.isCriminal);
+                attributesContainer.children[2].setAttribute('data-act', city.isPolluted);
+
+                this.detectColor(attributesContainer.children[0]);
+                this.detectColor(attributesContainer.children[1]);
+                this.detectColor(attributesContainer.children[2]);
 
                 city.cityAreas = app.cities[this.index].cityAreas;
                 city.id = app.cities[this.index].id;
                 app.cities.splice(this.index, 1, city);
                 localStorage.setItem('cities', JSON.stringify(app.cities));
-
-                app.clearDisplay();
-                app.displayCities();
+                app.clearSearchList();
+                app.initSearchList(app.cities);
+                app.clearCountriesList();
+                app.initCountriesList(app.cities);
             }
         });
     }
+
+    // Detect color of toogled buttons
     detectColor(item) {
         if (item.getAttribute('data-act') === 'true') {
             item.style.background = constants.activeColor;
@@ -148,9 +176,13 @@ class EventsForCities {
         }
     }
 
+    // Get info from modal window for new or eddited city
     getInfoFromModal() {
         let cityName = document.getElementById('addnewcity').value;
-        cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+        cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1).toLowerCase();
+
+        let countryName = document.getElementById('addnewcountry').value;
+        countryName = countryName.charAt(0).toUpperCase() + countryName.slice(1).toLowerCase();
 
         let isIndustrial = document.getElementById('i').getAttribute('data-act');
         let isCriminal = document.getElementById('c').getAttribute('data-act');
@@ -160,15 +192,11 @@ class EventsForCities {
         isCriminal = isCriminal === 'true' ? true : false;
         isPolluted = isPolluted === 'true' ? true : false;
 
-        let id;
+        let id = app.cities.length ? app.cities[app.cities.length - 1].id + 1 : 0;
 
-        if (app.cities.length === 0) {
-            id = 0;
-        } else {
-            id = app.cities[app.cities.length - 1].id + 1;
-        }
         const city = {
             id: id,
+            country: countryName,
             name: cityName,
             isIndustrial: isIndustrial,
             isCriminal: isCriminal,
@@ -179,16 +207,35 @@ class EventsForCities {
         return city;
     }
 
+    // Validate new or editted city
     validateCity(city) {
         if (city.name === '') {
+            this.errorEl.innerHTML = constants.alertMessageForCity;
             return false;
         }
-        if (city.name.length > 100) {
-            city.name = city.name.slice(0, 100);
+        if (city.country === '') {
+            this.errorEl.innerHTML = constants.alertMessageForCountry;
+            return false;
+        }
+        if (city.name.length > constants.maxLengthForCityName) {
+            city.name = city.name.slice(0, constants.maxLengthForCityName);
+        }
+        if (this.index){
+            if (city.name === app.cities[this.index].name) {
+                return true;
+            }
+        }
+        const bool = app.cities.every((item) => {
+            return item.name.toUpperCase() !== city.name.toUpperCase();
+        });
+        if (!bool) {
+            this.errorEl.innerHTML = constants.alertMessageForExistingCity;
+            return false;
         }
         return true;
     }
 
+    // Toogle color of button attributes
     toogleColor(target) {
         if (target.getAttribute('data-act') === 'true') {
             target.style.background = constants.noActiveColor;
@@ -197,5 +244,15 @@ class EventsForCities {
             target.style.background = constants.activeColor;
             target.setAttribute('data-act', 'true');
         }
+    }
+
+    // Remove city
+    removeCity(element) {
+        let parent = element;
+        while (parent.id !== 'accordion') {
+            parent = parent.parentNode;
+        }
+        this.wrapper.removeChild(parent);
+        return parent;
     }
 }

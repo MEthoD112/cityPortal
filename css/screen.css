@@ -1,22 +1,32 @@
+body {
+  margin-top: -65px;
+}
+body .load-data {
+  position: absolute;
+  top:5px;
+  left:5px;
+}
 .wrapper {
   max-width: 1200px;
-  margin: 5em auto 0;
+  margin: 6em auto 0;
+}
+.button-wrapper {
+  position: relative;
+  margin-bottom:6em;
 }
 .wrapper .panel-group {
   margin-bottom: 0;
 }
-.button-wrapper {
-  overflow: hidden;
+.alert-no-search {
+  text-align: center;
+  font-size: 2em;
+  color:#ff0000;
 }
 .addcity {
-  border:2px solid#2024c4;
-  border-radius: 0.6em;
-  color: #ffffff;
-  background: #51adf3;
-  width: 10em;
-  height: 2.3em;
-  float: right;
-  outline: none;
+  margin-bottom:0.7em;
+  position: absolute;
+  left:3px;
+  bottom:-6em;
 }
 .addcity:hover {
   background: #003ffe;
@@ -61,15 +71,7 @@
   overflow: hidden;
 }
 .newareabutton {
-  border:2px solid#2024c4;
-  border-radius: 0.6em;
-  color: #ffffff;
-  background: #51adf3;
-  width: 10em;
-  height: 2em;
-  float: right;
-  outline: none;
-  padding:0;
+  margin-bottom:0.7em;
 }
 .panel-collapse {
   background: #9dc2cc;
@@ -121,8 +123,19 @@
 .modal-content .modal-body {
   padding: 15px 35px;
 }
+.modal-title {
+  display: inline;
+}
+.city-error {
+  color:#ff0000;
+  font-size: 1.3em;
+  margin-left:3em;
+}
 .modal-content .modal-body input {
   width: 30em;
+}
+.modal-content .modal-body .addnewcity {
+  margin-left:2em;
 }
 .modal-content .modal-body .i,
 .modal-content .modal-body .c,
@@ -164,5 +177,91 @@
   position: relative;
 }
 .modal-body .areainput {
+  margin:0;
+}
+
+
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+    position: relative;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 500px;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
+}
+
+.form-group .input-countries {
+  width: 424px;
+}
+.form-group .attrib {
+  font-style:italic;
+  font-size: 1.3em;
+  position: relative;
+}
+.attrib input {
+  position: absolute;
+  left: 115px;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.form-horizontal .search-country {
+  position: absolute;
+  top:31px;
+  right: 14px;
+}
+.form-group .search-attributes {
+  position: absolute;
+  top: 80px;
+  right:-5px;
+}
+.form-group .wrapper-filter-attr {
+  margin-left:150px;
+}
+.form-group .filter-area-title {
+  display: block;
+}
+.form-group .citizen-input {
+  width:209px;
+}
+.form-group .citizen-filter-button {
+  position: absolute;
+  top:45px;
+  right:-5px;
+}
+.form-horizontal hr {
   margin:0;
 }

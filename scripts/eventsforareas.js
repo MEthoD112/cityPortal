@@ -3,18 +3,24 @@ class EventsForAreas {
         this.addNewAreaButton = document.getElementById('add-new-area');
         this.wrapper = document.getElementById('wrapper');
         this.saveArea = document.getElementById('save-area');
+        this.errorEl = document.getElementById('area-error');
 
         // Open modal window for adding area
         this.wrapper.addEventListener('click', (event) => {
             if (event.target.id === 'add-new-area') {
-                document.getElementById('myModalLabelForEdit').innerHTML = constants.addArea;
+                const modalLabel = document.getElementById('myModalLabelForEdit');
+                modalLabel.innerHTML = constants.addArea;
+                modalLabel.setAttribute('data-mode', 'add');
+                this.errorEl.innerHTML = '';
                 document.getElementById('areaname').value = '';
                 document.getElementById('areadescription').value = '';
                 document.getElementById('areacitizens').value = '';
 
-                const id = event.target.getAttribute('data-id');
+                this.element = event.target;
+                this.id = event.target.getAttribute('data-id');
+
                 app.cities.forEach((item, i) => {
-                    if (item.id === +id) {
+                    if (item.id === +this.id) {
                         this.index = i;
                     }
                 });
@@ -23,8 +29,8 @@ class EventsForAreas {
 
         // Add new area
         this.saveArea.addEventListener('click', (event) => {
-            const modalLabel = document.getElementById('myModalLabelForEdit').innerHTML;
-            if (modalLabel === constants.addArea) {
+            const modalLabel = document.getElementById('myModalLabelForEdit').getAttribute('data-mode');
+            if (modalLabel === 'add') {
                 const area = this.getInfoFromModalForArea();
                 const arr = app.cities[this.index].cityAreas;
                 this.saveArea.setAttribute('data-dismiss', 'modal');
@@ -33,17 +39,19 @@ class EventsForAreas {
                     this.saveArea.removeAttribute('data-dismiss');
                     return;
                 }
+                area.id = arr.length ? arr[arr.length - 1].id + 1 : 0;
+                const areaElement = this.formArea(area, this.id);
 
-                if (arr.length) {
-                    area.id = arr[arr.length - 1].id + 1;
-                } else {
-                    area.id = 0;
-                }
+                const parent = this.element.parentNode.parentNode;
+                parent.insertAdjacentHTML('beforeend', areaElement);
+
+                const areaId = this.id + 'areas';
+
+                const areasNameElement = document.getElementById(areaId);
+                areasNameElement.innerHTML = areasNameElement.innerHTML === constants.noAreas ? area.name : areasNameElement.innerHTML + ', ' + area.name;
 
                 app.cities[this.index].cityAreas.push(area);
                 localStorage.setItem('cities', JSON.stringify(app.cities));
-                app.clearDisplay();
-                app.displayCities();
             }
         });
 
@@ -51,7 +59,8 @@ class EventsForAreas {
         this.wrapper.addEventListener('click', (event) => {
             if (event.target.className === 'delete-area') {
                 const areaId = event.target.getAttribute('data-id');
-                const parent = event.target.parentElement;
+                const parent = event.target.parentNode;
+                const parentOfParent = parent.parentNode;
                 const cityId = parent.getAttribute('data-id');
                 let indexCity, indexArea;
 
@@ -66,22 +75,37 @@ class EventsForAreas {
                         indexArea = i;
                     }
                 });
-
+                parentOfParent.removeChild(parent);
                 app.cities[indexCity].cityAreas.splice(indexArea, 1);
+
+                const id = cityId + 'areas';
+                const areasName = document.getElementById(id);
+
+                let areasNames = [];
+                app.cities[indexCity].cityAreas.forEach((item => {
+                    areasNames.push(item.name);
+                }));
+                areasNames = areasNames.length < 1 ? constants.noAreas : areasNames.join(', ');
+
+                areasName.innerHTML = areasNames;
+                
                 localStorage.setItem('cities', JSON.stringify(app.cities));
-                app.clearDisplay();
-                app.displayCities();
+
             }
         });
 
         // Open modal window for editting area
         this.wrapper.addEventListener('click', (event) => {
             if (event.target.className === 'edit-area') {
-                document.getElementById('myModalLabelForEdit').innerHTML = constants.editArea;
-
+                const modalLabel = document.getElementById('myModalLabelForEdit');
+                modalLabel.innerHTML = constants.editArea;
+                modalLabel.setAttribute('data-mode', 'edit');
+                this.errorEl.innerHTML = '';
+                
                 const areaId = event.target.getAttribute('data-id');
                 const parent = event.target.parentElement;
                 const cityId = parent.getAttribute('data-id');
+                this.element = event.target;
 
                 app.cities.forEach((item, i) => {
                     if (item.id === +cityId) {
@@ -105,8 +129,8 @@ class EventsForAreas {
 
         // Edit area
         this.saveArea.addEventListener('click', (event) => {
-            const modalLabel = document.getElementById('myModalLabelForEdit').innerHTML;
-            if (modalLabel === constants.editArea) {
+            const modalLabel = document.getElementById('myModalLabelForEdit').getAttribute('data-mode');
+            if (modalLabel === 'edit') {
                 this.saveArea.setAttribute('data-dismiss', 'modal');
                 const area = this.getInfoFromModalForArea();
 
@@ -115,18 +139,36 @@ class EventsForAreas {
                     return;
                 }
                 area.id = app.cities[this.indexCity].cityAreas[this.indexArea].id;
-                app.cities[this.indexCity].cityAreas[this.indexArea] = area;
+                
+                const areaNameEl = this.element.nextElementSibling;
+                const areaDescrEl = areaNameEl.nextElementSibling;
+                const areaCitizenEl = areaDescrEl.nextElementSibling;
 
+                areaNameEl.innerHTML = area.name;
+                areaDescrEl.innerHTML = area.description;
+                areaCitizenEl.innerHTML = area.citizenAmount;
+
+                const id = app.cities[this.indexCity].id + 'areas';
+                const areasName = document.getElementById(id);
+
+                app.cities[this.indexCity].cityAreas[this.indexArea] = area;
+                let areasNames = [];
+                app.cities[this.indexCity].cityAreas.forEach((item => {
+                    areasNames.push(item.name);
+                }));
+                areasNames = areasNames.length < 1 ? constants.noAreas : areasNames.join(', ');
+
+                areasName.innerHTML = areasNames;
                 localStorage.setItem('cities', JSON.stringify(app.cities));
-                app.clearDisplay();
-                app.displayCities();
+
             }
         });
     }
 
+    // Get info from modal window for new or eddited area
     getInfoFromModalForArea() {
         let areaName = document.getElementById('areaname').value;
-        areaName = areaName.charAt(0).toUpperCase() + areaName.slice(1);
+        areaName = areaName.charAt(0).toUpperCase() + areaName.slice(1).toLowerCase();
         let description = document.getElementById('areadescription').value;
         let citizenAmount = parseInt(document.getElementById('areacitizens').value);
 
@@ -139,9 +181,10 @@ class EventsForAreas {
         return area;
     }
 
+    // Validate new or eddited area
     validateArea(area) {
         if (area.name === '' || area.description === '' || area.citizenAmount === '') {
-            alert('Please, insert all fields');
+            this.errorEl.innerHTML = constants.alertMessageForAreaFields;
             return false;
         }
         if (area.name.length > 100) {
@@ -151,9 +194,21 @@ class EventsForAreas {
             area.description = area.description.slice(0, 250);
         }
         if (!parseInt(area.citizenAmount) || parseInt(area.citizenAmount) < 1) {
-            alert('Please, insert correct number of citizens');
+            this.errorEl.innerHTML = constants.alertMessageForAreaCitizens;
             return false;
         }
         return true;
+    }
+
+    // Form HTMLElement for new area
+    formArea(area, id) {
+        const string = `<div class="areasdown" data-id=${ id }>
+                            <button class="delete-area" data-id=${ area.id }>X</button>
+                            <button class="edit-area" data-id=${ area.id } data-target="#areaModal" data-toggle="modal">E</button>
+                            <span class="areadown-name">${ area.name }</span>
+                            <span class="description">${ area.description }</span>
+                            <span class="citizenamount">${ area.citizenAmount + ' people' }</span>
+                          </div>`;
+        return string;                  
     }
 }

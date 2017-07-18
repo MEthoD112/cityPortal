@@ -2,12 +2,16 @@ class initApp {
     constructor() {
         this.cities = JSON.parse(localStorage.getItem('cities')) || [];
         this.wrapper = document.getElementById('wrapper');
-        //this.displayCities();
+        this.cityList = document.getElementById('cities-list');
+        this.countriesList = document.getElementById('countries-list');
     }
 
-    // Method for rendering everything
-    displayCities() {
-        this.cities.forEach((item) => {
+    // Method for initial rendering and rendering block of city with areas
+    displayCities(cities) {
+        if (!cities.join) {
+            cities = [cities];
+        }
+        cities.forEach((item) => {
             let areasNames = [];
             let areas = '';
 
@@ -20,7 +24,6 @@ class initApp {
             const pActive = item.isPolluted ? 'true' : 'false';
 
             const iD = item.id;
-
             item.cityAreas.forEach((item) => {
                 areasNames.push(item.name);
                 areas += `<div class="areasdown" data-id=${ iD }>
@@ -31,9 +34,9 @@ class initApp {
                             <span class="citizenamount">${ item.citizenAmount + ' people' }</span>
                           </div>`;
             });
-            areasNames = areasNames.length < 1 ? 'No Areas' : areasNames.join(', ');
+            areasNames = areasNames.length < 1 ? constants.noAreas : areasNames.join(', ');
 
-            var string =
+            const string =
                 `<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingOne">
@@ -44,7 +47,7 @@ class initApp {
                                                                 aria-expanded="false" aria-controls=${ 'collapse' + item.id }>
                                 ${ item.name }
                             </a>
-                            <div class="areas"><span>${ areasNames }</span></div>
+                            <div class="areas"><span id=${item.id + 'areas'}>${ areasNames }</span></div>
                             <div class="marks">
                                 <button id="i-button" data-id=${ item.id } style="background:${ iColor }" class="attributes" data-act=${ iActive }>I</button>
                                 <button id="c-button" data-id=${ item.id } style="background:${ cColor }" class="attributes" data-act=${ cActive }>C</button>
@@ -73,6 +76,44 @@ class initApp {
         panels = [...panels];
         for (let i = 0; i < panels.length; i++) {
             this.wrapper.removeChild(panels[i]);
+        }
+    }
+
+    // Init cities in search list
+    initSearchList(cities) {
+        cities.forEach((item) => {
+            let string = `<option value="${item.name}"></option>`;
+            this.cityList.insertAdjacentHTML('beforeend', string);
+        });
+    }
+
+    // Clear cities in search list
+    clearSearchList() {
+        const children = [...this.cityList.children];
+        for (let i = 0; i < children.length; i++) {
+            this.cityList.removeChild(children[i]);
+        }
+    }
+
+    // Init countries in search list
+    initCountriesList(countries) {
+        let countriesArr = [];
+        countries.forEach((item) => {
+            if (countriesArr.indexOf(item.country) === -1) {
+                countriesArr.push(item.country);
+            }
+        });
+        countriesArr.forEach((item) => {
+            let string = `<option value="${item}"></option>`;
+            this.countriesList.insertAdjacentHTML('beforeend', string);
+        });
+    }
+
+    // Clear countries in search list
+    clearCountriesList() {
+        const children = [...this.countriesList.children];
+        for (let i = 0; i < children.length; i++) {
+            this.countriesList.removeChild(children[i]);
         }
     }
 }
