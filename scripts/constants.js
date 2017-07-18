@@ -16,4 +16,6 @@ const constants = {
     alertNoCountries: 'No such country in database, use dropdown menu',
     alertNoCitiesWithAttr: 'No cities with such attributes',
     alertNoAreasWithSuchCitizens: 'No areas with such number of citizens'
-}
+};
+
+export { constants };

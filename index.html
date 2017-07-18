@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="utf-8">
@@ -12,10 +11,9 @@
     <script src="jquery/jquery.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
 </head>
-
 <body>
     <button type="button" class="btn btn-info load-data btn-sm" id="load-data">Load example data</button>
-    <!-- Container for button add city -->
+    <!-- Container for search, filter and buttons -->
     <div id="wrapper" class="wrapper">
         <div class="button-wrapper">
             <div class="input-group" id="adv-search">
@@ -25,17 +23,20 @@
                 <div class="input-group-btn">
                     <div class="btn-group" role="group">
                         <div class="dropdown dropdown-lg" id="dropdown-menu">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdown-button"><span class="caret"></span></button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdown-button">
+                                <span class="caret"></span>
+                            </button>
                             <div class="dropdown-menu dropdown-menu-right" role="menu">
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <label for="input-search-countries">Filter by countries</label>
-                                        <input type="text" class="form-control input-countries" placeholder="Search for countries" list="countries-list" id="input-search-countries"
-                                        />
+                                        <input type="text" class="form-control input-countries" placeholder="Search for countries" list="countries-list" id="input-search-countries"/>
                                         <datalist id="countries-list">
                                         </datalist>
                                     </div>
-                                    <button id="search-country-button" type="button" class="btn btn-primary search-country"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    <button id="search-country-button" type="button" class="btn btn-primary search-country">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
                                     <hr>
                                     <div class="form-group" id="filter-attributes">
                                         <label>Filter by attributes</label>
@@ -58,33 +59,39 @@
                                             </label>
                                         </div>
                                         <button id="search-attributes-button" type="button" class="btn btn-primary search-attributes">
-                                            <span class="glyphicon glyphicon-search" aria-hidden="true">
-                                            </span>
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                         </button>
                                     </div>
                                     <hr>
                                     <div class="form-group">
                                         <label class="filter-area-title">Filter areas by citizens</label>
-                                        <label class="citizen-input" for="min-value-citizens">Minimal value:
+                                        <label class="citizen-input" for="min-value-citizens">
+                                            Minimal value:
                                             <input id="min-value-citizens" class="form-control min-value" type="text" />
                                         </label>
-                                        
-                                        <label class="citizen-input" for="max-value-citizens">Maximum value: 
+                                        <label class="citizen-input" for="max-value-citizens">
+                                            Maximum value: 
                                             <input id="max-value-citizens" class="form-control max-value" type="text" />
                                         </label>
-                                        <button id="search-by-citizens" type="button" class="btn btn-primary citizen-filter-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                        <button id="search-by-citizens" type="button" class="btn btn-primary citizen-filter-button">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary" id="search-button-cities"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                        <button type="button" class="btn btn-primary" id="reset-button-cities"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button>
+                        <button type="button" class="btn btn-primary" id="search-button-cities">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-primary" id="reset-button-cities">
+                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="addcity btn btn-primary .btn-sm" data-toggle="modal" data-target="#myModal" id="add-new-city-button">
+                            Add New City
+                        </button>
                     </div>
                 </div>
             </div>
-            <button type="button" class="addcity btn btn-primary .btn-sm" data-toggle="modal" data-target="#myModal" id="add-new-city-button">
-                Add New City
-            </button>
         </div>
     </div>
     <!-- Modal for adding area -->
@@ -92,15 +99,17 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <h4 class="modal-title" id="myModalLabelForEdit"></h4>
                     <span id="area-error" class="city-error"></span>
                 </div>
                 <div class="modal-body">
                     <div class="areainput">
                         <label for="areaname" class="arealabel">
-                        Name: 
-                        <input type="text" id="areaname">
+                            Name: 
+                            <input type="text" id="areaname">
                         </label>
                     </div>
                     <div class="areainput">
@@ -128,7 +137,9 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <h4 class="modal-title" id="myModalLabel"></h4>
                     <span id="city-error" class="city-error"></span>
                 </div>
@@ -170,12 +181,5 @@
         </div>
     </div>
 </body>
-<script src="scripts/data.js"></script>
-<script src="scripts/constants.js"></script>
-<script src="scripts/initapp.js"></script>
-<script src="scripts/eventsforcities.js"></script>
-<script src="scripts/eventsforareas.js"></script>
-<script src="scripts/search.js"></script>
-<script src="scripts/app.js"></script>
-
+<script src="build.js"></script>
 </html>

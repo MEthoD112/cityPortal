@@ -1,4 +1,7 @@
-class EventsForAreas {
+import { app } from './app';
+import { constants } from './constants';
+
+export class EventsForAreas {
     constructor() {
         this.addNewAreaButton = document.getElementById('add-new-area');
         this.wrapper = document.getElementById('wrapper');
@@ -203,8 +206,8 @@ class EventsForAreas {
     // Form HTMLElement for new area
     formArea(area, id) {
         const string = `<div class="areasdown" data-id=${ id }>
-                            <button class="delete-area" data-id=${ area.id }>X</button>
-                            <button class="edit-area" data-id=${ area.id } data-target="#areaModal" data-toggle="modal">E</button>
+                            <button class="delete-area" data-id=${ area.id }></button>
+                            <button class="edit-area" data-id=${ area.id } data-target="#areaModal" data-toggle="modal"></button>
                             <span class="areadown-name">${ area.name }</span>
                             <span class="description">${ area.description }</span>
                             <span class="citizenamount">${ area.citizenAmount + ' people' }</span>

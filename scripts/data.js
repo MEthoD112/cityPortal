@@ -1,4 +1,6 @@
-class ExampleData {
+import { app } from './app';
+
+export class ExampleData {
     constructor() {
         const json = [
             {

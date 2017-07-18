@@ -1,3 +1,9 @@
+import { initApp } from './initapp';
+import { EventsForCities } from './eventsforcities';
+import { EventsForAreas } from './eventsforareas';
+import { ExampleData } from './data';
+import { Search } from './search';
+
 const app = new initApp();
 app.displayCities(app.cities);
 app.initSearchList(app.cities);
@@ -6,3 +12,5 @@ const events = new EventsForCities();
 const eventsForAreas = new EventsForAreas();
 const exampleData = new ExampleData();
 const search = new Search();
+
+export { app, events };

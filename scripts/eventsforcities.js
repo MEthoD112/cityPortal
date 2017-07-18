@@ -1,4 +1,7 @@
-class EventsForCities {
+import { app } from './app';
+import { constants } from './constants';
+
+export class EventsForCities {
     constructor() {
         this.wrapper = document.getElementById('wrapper');
         this.saveNewCity = document.getElementById('save-new-city');

@@ -1,54 +1,55 @@
 body {
   margin-top: -65px;
 }
+
 body .load-data {
   position: absolute;
-  top:5px;
-  left:5px;
+  top: 5px;
+  left: 5px;
 }
+
 .wrapper {
   max-width: 1200px;
   margin: 6em auto 0;
 }
+
 .button-wrapper {
   position: relative;
-  margin-bottom:6em;
+  margin-bottom: 3em;
 }
+
 .wrapper .panel-group {
   margin-bottom: 0;
 }
+
 .alert-no-search {
   text-align: center;
   font-size: 2em;
-  color:#ff0000;
+  color: #ff0000;
 }
-.addcity {
-  margin-bottom:0.7em;
-  position: absolute;
-  left:3px;
-  bottom:-6em;
-}
-.addcity:hover {
-  background: #003ffe;
-}
+
 .panel .panel-heading {
   background: #c6daea;
   overflow: hidden;
   position: relative;
 }
+
 .panel .panel-heading a {
-  margin-left: 1em;
-  color:#003ffe;
+  position: absolute;
+  top: 1.2em;
+  left: 7em;
+  color: #003ffe;
   font-weight: bold;
 }
+
 .panel .panel-heading button {
-  width: 2em;
-  height: 2em;
+  width: 2.3em;
+  height: 2.3em;
   color: #ffffff;
-  background: #ff0000;
   outline: none;
   border-radius: 0.4em;
 }
+
 .areas {
   display: inline-block;
   position: absolute;
@@ -57,86 +58,102 @@ body .load-data {
   width: 50em;
   margin-top: 0.4em;
 }
+
 .areas span {
   padding: 1em;
 }
+
 .marks {
   float:right;
 }
+
 .marks button {
   width: 2em;
   height: 2em;
 }
+
 .newarea {
   overflow: hidden;
 }
+
 .newareabutton {
-  margin-bottom:0.7em;
+  margin-bottom: 0.7em;
 }
+
 .panel-collapse {
   background: #9dc2cc;
 }
+
 .areasdown {
   background: #b1f7be;
   overflow: hidden;
   border-radius: 0.45em;
   margin-bottom: 0.4em;
-  height: 2.5em;
+  height: 2.9em;
   position: relative;
 }
+
 .areasdown button {
-  width: 2em;
-  height: 2em;
-  color: #ffffff;
-  background: #ff0000;
-  outline: none;
+  width: 2.3em;
+  height: 2.3em;
   border-radius: 0.4em;
-  margin-top:0.2em;
+  margin-top: 0.35em;
 }
+
 .areasdown button:first-child {
-  margin-left:1em;
-}
-.areasdown span {
   margin-left: 1em;
 }
+
+.areasdown .areadown-name {
+  position: absolute;
+  top: 0.8em;
+  left: 7em;
+}
+
 .areasdown .areadown-name {
   font-weight: bold;
 }
+
 .description {
   display: inline-block;
   width: 50em;
   position: absolute;
-  left:23em;
-  top:0.6em;
+  left: 23em;
+  top: 0.6em;
   background: #ffffff;
-  padding-left:1em;
+  padding-left: 1em;
 }
+
 .citizenamount {
-  float:right;
+  float: right;
   width: 8em;
   background: #ffffff;
   margin: 0.6em;
   text-align: center;
 }
 
-
 .modal-content .modal-body {
   padding: 15px 35px;
 }
+
 .modal-title {
   display: inline;
 }
+
 .city-error {
   color:#ff0000;
   font-size: 1.3em;
-  margin-left:3em;
+  margin-left: 3em;
 }
+
 .modal-content .modal-body input {
   width: 30em;
 }
+
 .modal-content .modal-body .addnewcity {
-  margin-left:2em;
+  margin-left: 2em;
 }
+
 .modal-content .modal-body .i,
 .modal-content .modal-body .c,
 .modal-content .modal-body .p {
@@ -144,67 +161,76 @@ body .load-data {
   height: 1.6em;
   position: absolute;
   right: 2em;
-  top:0;
+  top: 0;
   border: none;
   border-radius: 6px;
   outline: none;
 }
+
 .modal-content .modal-body .i:hover,
 .modal-content .modal-body .c:hover,
 .modal-content .modal-body .p:hover {
-  border: 1px solid #ff0000;
+  border: none;
 }
+
 .modal-content .modal-body .i {
   background: #4ee321;
 }
+
 .modal-content .modal-body .c,
 .modal-content .modal-body .p {
   background: #f39846;
 }
+
 .modal-body div {
-  margin-left: 11em;
-  margin-top:2em;
+  margin-left: 12em;
+  margin-top: 2em;
   position: relative;
-}
-.modal-body div label {
-  font-size:1.3em;
-  cursor: pointer;
-}
-.modal-body div div {
-  position: relative;
-}
-.modal-body .arealabel {
-  position: relative;
-}
-.modal-body .areainput {
-  margin:0;
 }
 
+.modal-body div label {
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+.modal-body div div, .modal-body .arealabel {
+  position: relative;
+}
+
+.modal-body .areainput {
+  margin: 0;
+}
 
 .dropdown.dropdown-lg .dropdown-menu {
     margin-top: -1px;
     padding: 6px 20px;
 }
+
 .input-group-btn .btn-group {
-    display: flex !important;
+    display: flex;
 }
+  
 .btn-group .btn {
     border-radius: 0;
     margin-left: -1px;
 }
+
 .btn-group .btn:last-child {
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
 }
+
 .btn-group .form-horizontal .btn[type="submit"] {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
+
 .form-horizontal .form-group {
     margin-left: 0;
     margin-right: 0;
     position: relative;
 }
+
 .form-group .form-control:last-child {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
@@ -221,16 +247,18 @@ body .load-data {
     .dropdown.dropdown-lg .dropdown-menu {
         min-width: 500px;
     }
-}
+} 
 
 .form-group .input-countries {
   width: 424px;
 }
+
 .form-group .attrib {
-  font-style:italic;
+  font-style: italic;
   font-size: 1.3em;
   position: relative;
 }
+
 .attrib input {
   position: absolute;
   left: 115px;
@@ -240,28 +268,56 @@ body .load-data {
 
 .form-horizontal .search-country {
   position: absolute;
-  top:31px;
+  top: 31px;
   right: 14px;
 }
+
 .form-group .search-attributes {
   position: absolute;
   top: 80px;
-  right:-5px;
+  right: -5px;
 }
+
 .form-group .wrapper-filter-attr {
-  margin-left:150px;
+  margin-left: 240px;
 }
+
 .form-group .filter-area-title {
   display: block;
 }
+
 .form-group .citizen-input {
-  width:209px;
+  width: 209px;
 }
+
 .form-group .citizen-filter-button {
   position: absolute;
-  top:45px;
-  right:-5px;
+  top: 45px;
+  right: -5px;
 }
+
+.form-group .wrapper-filter-attr input {
+  border-radius: 3px;
+  border: none;
+  outline: none;
+}
+
 .form-horizontal hr {
-  margin:0;
+  margin: 0;
+}
+
+.panel-heading .delete-city {
+  background: url(../img/sprite.png) no-repeat -4px -5px;
+}
+
+.panel-heading .edit-city {
+  background: url(../img/sprite.png) no-repeat -35px -5px;
+}
+
+.areasdown .delete-area {
+  background: url(../img/sprite.png) no-repeat -4px -5px;
+}
+
+.areasdown .edit-area {
+  background: url(../img/sprite.png) no-repeat -35px -5px;
 }

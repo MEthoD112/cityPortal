@@ -1,4 +1,8 @@
-class Search {
+import { app } from './app';
+import { constants } from './constants';
+import { events } from './app';
+
+export class Search {
     constructor() {
         this.wrapper = document.getElementById('wrapper');
         this.searchButton = document.getElementById('search-button-cities');
@@ -64,8 +68,8 @@ class Search {
             const minCitizensInput = document.getElementById('min-value-citizens');
             const maxCitizensInput = document.getElementById('max-value-citizens');
             const arrOfMinAndMax = this.findMinAndMaxValuesOfCitizens();
-            minCitizensInput.value = arrOfMinAndMax[0];
-            maxCitizensInput.value = arrOfMinAndMax[1];
+            minCitizensInput.value = arrOfMinAndMax[0] || '';
+            maxCitizensInput.value = arrOfMinAndMax[1] || '';
         });
 
         // Toogle attributes in filter window
