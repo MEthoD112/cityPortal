@@ -41,12 +41,13 @@ export class initApp {
             const string =
                 `<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
+                        <div class="toggle-container" role="button" data-toggle="collapse" data-parent="#accordion" href=${ '#collapse' + item.id}
+                                                                aria-expanded="false" aria-controls=${ 'collapse' + item.id}></div>
                         <div class="panel-heading" role="tab" id="headingOne">
                             <button class="delete-city" data-id=${ item.id}></button>
                             <button class="edit-city" data-id=${ item.id} data-target="#myModal" data-toggle="modal"></button>
                             
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href=${ '#collapse' + item.id}
-                                                                aria-expanded="false" aria-controls=${ 'collapse' + item.id}>
+                            <a>
                                 ${ item.name}
                             </a>
                             <div class="areas"><span id=${item.id + 'areas'}>${areasNames}</span></div>

@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CityPortal</title>
     <link rel="shortcut icon" href="img/favicon.jpg" type="image/x-icon">
-    <link href="dist/css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/screen.css">
-    <script src="jquery/jquery.js"></script>
-    <script src="dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <button type="button" class="btn btn-info load-data btn-sm" id="load-data">Load example data</button>
+    <button type="button" class="btn btn-info load-data btn-sm" id="load-data">Load test data</button>
     <!-- Container for search, filter and buttons -->
     <div id="wrapper" class="wrapper">
         <div class="button-wrapper">
@@ -30,6 +28,7 @@
                                 <form class="form-horizontal" role="form">
                                     <div class="form-group">
                                         <label for="input-search-countries">Filter by countries</label>
+                                        <span id="countries-error" class="countries-error"></span>
                                         <input type="text" class="form-control input-countries" placeholder="Search for countries" list="countries-list" id="input-search-countries"/>
                                         <datalist id="countries-list">
                                         </datalist>
@@ -40,6 +39,7 @@
                                     <hr>
                                     <div class="form-group" id="filter-attributes">
                                         <label>Filter by attributes</label>
+                                        <span id="atrributes-error" class="atrributes-error"></span>
                                         <div class="wrapper-filter-attr">
                                             <label for="i-filter" class="attrib">
                                                 Is Industrial
@@ -65,6 +65,8 @@
                                     <hr>
                                     <div class="form-group">
                                         <label class="filter-area-title">Filter areas by citizens</label>
+                                        <span id="citizens-error" class="citizens-error"></span>
+                                        <div></div>
                                         <label class="citizen-input" for="min-value-citizens">
                                             Minimal value:
                                             <input id="min-value-citizens" class="form-control min-value" type="text" />
@@ -181,5 +183,5 @@
         </div>
     </div>
 </body>
-<script src="build.js"></script>
+<script src="scripts/build.js"></script>
 </html>

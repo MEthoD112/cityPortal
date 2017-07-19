@@ -1,7 +1,7 @@
 module.exports = {
-    entry: './scripts/app.js',
+    entry: ["babel-polyfill", "./scripts/app.js"],
     output: {
-        filename: 'build.js'
+        filename: 'scripts/build.js'
     },
     module: {
         loaders: [{
@@ -13,10 +13,10 @@ module.exports = {
             }
         }]
     },
+    devtool: 'source-map',
+    watch: true,
 
-  watch: true,
-
-  watchOptions: {
-    aggregateTimeout: 150
-  }
+    watchOptions: {
+        aggregateTimeout: 150
+    }
 };

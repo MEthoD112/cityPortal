@@ -82,6 +82,7 @@ export class EventsForCities {
                 localStorage.setItem('cities', JSON.stringify(app.cities));
                 this.toogleColor(event.target);
             }
+            
         });
 
         // Delete city

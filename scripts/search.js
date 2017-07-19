@@ -48,7 +48,8 @@ export class Search {
                     return item;
                 }
             });
-            this.showAlertOrRenderCities(constants.alertNoCountries, countries);
+            this.clearFilterErrorMessages('countries-error', 'atrributes-error', 'citizens-error');
+            this.showAlertOrRenderFilters(constants.alertNoCountries, countries, 'countries-error');
             document.getElementById('input-search-countries').value = '';
             
         });
@@ -70,6 +71,7 @@ export class Search {
             const arrOfMinAndMax = this.findMinAndMaxValuesOfCitizens();
             minCitizensInput.value = arrOfMinAndMax[0] || '';
             maxCitizensInput.value = arrOfMinAndMax[1] || '';
+            this.clearFilterErrorMessages('countries-error', 'atrributes-error', 'citizens-error');
         });
 
         // Toogle attributes in filter window
@@ -97,16 +99,22 @@ export class Search {
                     return item;
                 }
             });
-            this.showAlertOrRenderCities(constants.alertNoCitiesWithAttr, cities);
+            this.clearFilterErrorMessages('countries-error', 'atrributes-error', 'citizens-error');
+            this.showAlertOrRenderFilters(constants.alertNoCitiesWithAttr, cities, 'atrributes-error');
         });
 
         // Search for areas by citizens
         this.searchForCitizens.addEventListener('click', () => {
             const minCitizensValue = +document.getElementById('min-value-citizens').value;
             const maxCitizensValue = +document.getElementById('max-value-citizens').value;
-
+            this.clearFilterErrorMessages('countries-error', 'atrributes-error', 'citizens-error');
+            if (isNaN(minCitizensValue) || isNaN(maxCitizensValue)) {
+                const errorEl = document.getElementById('citizens-error');
+                errorEl.innerHTML = constants.alertForAreaFilter;
+                return;
+            }
             const cities = this.findAreasByRangeOfCitizens(minCitizensValue, maxCitizensValue);
-            this.showAlertOrRenderCities(constants.alertNoAreasWithSuchCitizens, cities);
+            this.showAlertOrRenderFilters(constants.alertNoAreasWithSuchCitizens, cities, 'citizens-error');
         });
     }
 
@@ -157,6 +165,26 @@ export class Search {
             this.wrapper.insertAdjacentHTML('beforeend', string);
         } else {
             app.displayCities(cities);
+        }
+    }
+
+    // Show alert or render cities by filters
+    showAlertOrRenderFilters(message, cities, id) {
+        if (!cities.length) {
+            const errorEl = document.getElementById(id);
+            errorEl.innerHTML = message;
+        } else {
+            app.clearDisplay();
+            this.dropDownWrapper.classList.remove('open');
+            app.displayCities(cities);
+        }
+    }
+
+    // Clear error messages in filter window
+    clearFilterErrorMessages() {
+        for (let i = 0; i < arguments.length; i++) {
+            let errorEL = document.getElementById(arguments[i]);
+            errorEL.innerHTML = '';
         }
     }
 }
