@@ -19,4 +19,4 @@ const eventsForAreas = new EventsForAreas();
 const exampleData = new ExampleData();
 const search = new Search();
 
-export { app, events };
+export { app, events, search };

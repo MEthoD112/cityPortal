@@ -9,4 +9,8 @@ https://rawgit.com/MEthoD112/cityPortal/master/index.html
  * Sass
  
  ### Browsers:
- * Chrome
+ * Chrome 59
+ * FireFox 54
+ * Opera 46
+ * Edge 15
+ * IE 11

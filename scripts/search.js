@@ -68,7 +68,7 @@ export class Search {
 
             const minCitizensInput = document.getElementById('min-value-citizens');
             const maxCitizensInput = document.getElementById('max-value-citizens');
-            const arrOfMinAndMax = this.findMinAndMaxValuesOfCitizens();
+            const arrOfMinAndMax = this.findMinAndMaxValuesOfCitizens(app.cities);
             minCitizensInput.value = arrOfMinAndMax[0] || '';
             maxCitizensInput.value = arrOfMinAndMax[1] || '';
             this.clearFilterErrorMessages('countries-error', 'atrributes-error', 'citizens-error');
@@ -119,9 +119,9 @@ export class Search {
     }
 
     // Find minimal and maximum values of area citizens
-    findMinAndMaxValuesOfCitizens() {
+    findMinAndMaxValuesOfCitizens(cities) {
         let arr = [];
-        app.cities.forEach((item) => {
+        cities.forEach((item) => {
             item.cityAreas.forEach((item) => {
                 if (item.citizenAmount) {
                     arr.push(item.citizenAmount)

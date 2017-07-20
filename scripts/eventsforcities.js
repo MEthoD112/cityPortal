@@ -121,7 +121,7 @@ export class EventsForCities {
                         this.index = i;
                     }
                 });
-
+                this.name = app.cities[this.index].name;
                 document.getElementById('addnewcity').value = app.cities[this.index].name;
                 document.getElementById('addnewcountry').value = app.cities[this.index].country;
                 document.getElementById('i').setAttribute('data-act', app.cities[this.index].isIndustrial);
@@ -183,10 +183,10 @@ export class EventsForCities {
     // Get info from modal window for new or eddited city
     getInfoFromModal() {
         let cityName = document.getElementById('addnewcity').value;
-        cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1).toLowerCase();
+        cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
 
         let countryName = document.getElementById('addnewcountry').value;
-        countryName = countryName.charAt(0).toUpperCase() + countryName.slice(1).toLowerCase();
+        countryName = countryName.charAt(0).toUpperCase() + countryName.slice(1);
 
         let isIndustrial = document.getElementById('i').getAttribute('data-act');
         let isCriminal = document.getElementById('c').getAttribute('data-act');
@@ -224,10 +224,9 @@ export class EventsForCities {
         if (city.name.length > constants.maxLengthForCityName) {
             city.name = city.name.slice(0, constants.maxLengthForCityName);
         }
-        if (this.index){
-            if (city.name === app.cities[this.index].name) {
-                return true;
-            }
+        if (city.name === this.name) {
+            this.name = undefined;
+            return true;
         }
         const bool = app.cities.every((item) => {
             return item.name.toUpperCase() !== city.name.toUpperCase();

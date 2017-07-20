@@ -1,4 +1,5 @@
-import { app } from './app';
+import { app, search } from './app';
+
 
 export class ExampleData {
     constructor() {
@@ -212,6 +213,9 @@ export class ExampleData {
             app.displayCities(json);
             app.clearSearchList();
             app.initSearchList(json);
+            app.clearCountriesList();
+            app.initCountriesList(json);
+            app.cities = JSON.parse(localStorage.getItem('cities')) || [];
         });
     }
 }

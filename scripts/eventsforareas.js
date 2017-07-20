@@ -112,17 +112,18 @@ export class EventsForAreas {
 
                 app.cities.forEach((item, i) => {
                     if (item.id === +cityId) {
-                        this.indexCity = i;
+                        this.index = i;
                     }
                 });
 
-                app.cities[this.indexCity].cityAreas.forEach((item, i) => {
+                app.cities[this.index].cityAreas.forEach((item, i) => {
                     if (item.id === +areaId) {
                         this.indexArea = i;
                     }
                 });
 
-                const area = app.cities[this.indexCity].cityAreas[this.indexArea];
+                const area = app.cities[this.index].cityAreas[this.indexArea];
+                this.name = area.name;
 
                 document.getElementById('areaname').value = area.name;
                 document.getElementById('areadescription').value = area.description;
@@ -141,7 +142,7 @@ export class EventsForAreas {
                     this.saveArea.removeAttribute('data-dismiss');
                     return;
                 }
-                area.id = app.cities[this.indexCity].cityAreas[this.indexArea].id;
+                area.id = app.cities[this.index].cityAreas[this.indexArea].id;
                 
                 const areaNameEl = this.element.nextElementSibling;
                 const areaDescrEl = areaNameEl.nextElementSibling;
@@ -151,12 +152,12 @@ export class EventsForAreas {
                 areaDescrEl.innerHTML = area.description;
                 areaCitizenEl.innerHTML = area.citizenAmount;
 
-                const id = app.cities[this.indexCity].id + 'areas';
+                const id = app.cities[this.index].id + 'areas';
                 const areasName = document.getElementById(id);
 
-                app.cities[this.indexCity].cityAreas[this.indexArea] = area;
+                app.cities[this.index].cityAreas[this.indexArea] = area;
                 let areasNames = [];
-                app.cities[this.indexCity].cityAreas.forEach((item => {
+                app.cities[this.index].cityAreas.forEach((item => {
                     areasNames.push(item.name);
                 }));
                 areasNames = areasNames.length < 1 ? constants.noAreas : areasNames.join(', ');
@@ -171,7 +172,7 @@ export class EventsForAreas {
     // Get info from modal window for new or eddited area
     getInfoFromModalForArea() {
         let areaName = document.getElementById('areaname').value;
-        areaName = areaName.charAt(0).toUpperCase() + areaName.slice(1).toLowerCase();
+        areaName = areaName.charAt(0).toUpperCase() + areaName.slice(1);
         let description = document.getElementById('areadescription').value;
         let citizenAmount = parseInt(document.getElementById('areacitizens').value);
 
@@ -200,6 +201,18 @@ export class EventsForAreas {
             this.errorEl.innerHTML = constants.alertMessageForAreaCitizens;
             return false;
         }
+        if (this.indexArea !== undefined && this.index !== undefined){
+            if (area.name === this.name) {
+                return true;
+            }
+        }
+        const bool = app.cities[this.index].cityAreas.every((item) => {
+            return item.name.toUpperCase() !== area.name.toUpperCase();
+        });
+        if (!bool) {
+            this.errorEl.innerHTML = constants.alertMessageForExistingArea;
+            return false;
+        }    
         return true;
     }
 
